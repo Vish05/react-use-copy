@@ -1,22 +1,27 @@
 # react-use-copy
 
-A simple, lightweight React hook to copy text to the clipboard with ease.
+> A lightweight React hook for copying text to the clipboard with TypeScript support.
+
+![npm](https://img.shields.io/npm/v/react-use-copy)
+![downloads](https://img.shields.io/npm/dm/react-use-copy)
+![license](https://img.shields.io/npm/l/react-use-copy)
+![typescript](https://img.shields.io/badge/TypeScript-Ready-blue)
+
+## ✨ Features
+
+- 🚀 Lightweight
+- 📋 Uses the native Clipboard API
+- ⚛️ React Hooks
+- 📝 Full TypeScript support
+- 🎯 Simple API
+- 🌳 Tree-shakeable
+- ❌ Zero dependencies
+- 🔄 Configurable reset timeout
+- ✅ Success & Error callbacks
 
 ---
 
-## Features
-
-- 📋 Copy text to clipboard
-- ⚡ Lightweight and fast
-- ⏱ Auto reset with configurable timeout
-- ✅ Success callback support
-- ❌ Error handling support
-- 🧠 Fully TypeScript supported
-- 🔌 Works with React Hooks (16.8+)
-
----
-
-## Installation
+## 📦 Installation
 
 ```bash
 npm install react-use-copy
@@ -28,56 +33,106 @@ or
 yarn add react-use-copy
 ```
 
-# Coupon Code Example
+or
 
-Perfect for e-commerce websites.
+```bash
+pnpm add react-use-copy
+```
+
+---
+
+## 🚀 Basic Usage
 
 ```tsx
 import { useCopy } from "react-use-copy";
 
-export default function CouponCard() {
+export default function App() {
   const { copy, copied } = useCopy();
 
-  const coupon = "SAVE20";
+  return (
+    <button onClick={() => copy("Hello World!")}>
+      {copied ? "Copied!" : "Copy"}
+    </button>
+  );
+}
+```
+
+---
+
+## 🎟 Coupon Code Example
+
+```tsx
+import { useCopy } from "react-use-copy";
+
+export default function Coupon() {
+  const { copy, copied } = useCopy({
+    timeout: 2000,
+  });
 
   return (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: 8,
-        padding: 20,
-        maxWidth: 320,
-      }}
-    >
-      <h3>20% OFF</h3>
+    <div>
+      <h2>20% OFF</h2>
 
       <p>
-        Use coupon code:
-        <strong> {coupon}</strong>
+        Coupon Code: <strong>SAVE20</strong>
       </p>
 
-      <button onClick={() => copy(coupon)}>
-        {copied ? "Coupon Copied!" : "Copy Coupon"}
+      <button onClick={() => copy("SAVE20")}>
+        {copied ? "Copied!" : "Copy Coupon"}
       </button>
     </div>
   );
 }
 ```
 
-## API
+---
 
-### `useCopy()`
+## ⚙️ API
 
-Returns:
+### useCopy(options?)
 
-| Property | Type                              | Description                                    |
-| -------- | --------------------------------- | ---------------------------------------------- |
-| `copy`   | `(text: string) => Promise<void>` | Copies text to clipboard                       |
-| `copied` | `boolean`                         | Indicates whether the last copy was successful |
-| `error`  | `Error \| null`                   | Clipboard error, if any                        |
+```ts
+const { copy, copied, error, reset } = useCopy(options);
+```
+
+### Options
+
+| Property  | Type                   | Default | Description                      |
+| --------- | ---------------------- | ------- | -------------------------------- |
+| timeout   | number                 | 1500    | Reset copied state after timeout |
+| onSuccess | () => void             | -       | Called after successful copy     |
+| onError   | (error: Error) => void | -       | Called if copy fails             |
+
+### Returns
+
+| Property | Type                                 | Description                  |
+| -------- | ------------------------------------ | ---------------------------- |
+| copy     | `(text: string) => Promise<boolean>` | Copy text to clipboard       |
+| copied   | boolean                              | Indicates successful copy    |
+| error    | Error \| null                        | Last clipboard error         |
+| reset    | () => void                           | Reset copied and error state |
 
 ---
 
-## Browser Support
+## 🌐 Browser Support
 
-Supports all modern browsers that implement the Clipboard API.
+Works in all modern browsers supporting the Clipboard API.
+
+- Chrome
+- Edge
+- Firefox
+- Safari
+
+---
+
+## 🤝 Contributing
+
+Issues and pull requests are welcome.
+
+If you find a bug or have a feature request, please open an issue.
+
+---
+
+## ⭐ Support
+
+If you find this package useful, please consider giving it a ⭐ on GitHub.

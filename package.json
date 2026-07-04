@@ -49,10 +49,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vishaltanna/react-use-copy.git"
+    "url": "git+https://github.com/Vish05/react-use-copy.git"
   },
   "bugs": {
-    "url": "https://github.com/vishaltanna/react-use-copy/issues"
+    "url": "https://github.com/Vish05/react-use-copy/issues"
   },
-  "homepage": "https://github.com/vishaltanna/react-use-copy#readme"
+  "homepage": "https://github.com/Vish05/react-use-copy#readme"
 }
