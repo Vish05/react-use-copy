@@ -1,49 +1,78 @@
-export interface UseCopyOptions {
-  /**
-   * Time in milliseconds before the `copied` state resets.
-   * @default 1500
-   */
-  timeout?: number;
+import { useCallback, useEffect, useRef, useState } from "react";
+import { copyToClipboard } from "../utils/clipboard";
+import type { UseCopyOptions, UseCopyReturn } from "../types";
 
-  /**
-   * Called after a successful copy operation.
-   */
-  onSuccess?: () => void;
+export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
+  const { timeout = 1500, onSuccess, onError } = options;
 
-  /**
-   * Called when the copy operation fails.
-   */
-  onError?: (error: Error) => void;
-}
+  const [copied, setCopied] = useState(false);
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
-export interface UseCopyReturn {
-  /**
-   * Copies the provided text to the clipboard.
-   *
-   * @returns `true` if the copy succeeds, otherwise `false`.
-   */
-  copy: (text: string) => Promise<boolean>;
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  /**
-   * Indicates whether the last copy operation was successful.
-   */
-  copied: boolean;
+  const clearCopyTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
 
-  /**
-   * The last successfully copied text.
-   *
-   * Returns `null` if nothing has been copied yet
-   * or after calling `reset()`.
-   */
-  copiedText: string | null;
+  const reset = useCallback(() => {
+    clearCopyTimer();
+    setCopied(false);
+    setCopiedText(null);
+    setError(null);
+  }, [clearCopyTimer]);
 
-  /**
-   * The last error encountered during a copy operation.
-   */
-  error: Error | null;
+  const copy = useCallback(
+    async (text: string): Promise<boolean> => {
+      clearCopyTimer();
 
-  /**
-   * Resets the `copied`, `copiedText`, and `error` states.
-   */
-  reset: () => void;
+      try {
+        await copyToClipboard(text);
+
+        setCopied(true);
+        setCopiedText(text);
+        setError(null);
+
+        onSuccess?.();
+
+        timerRef.current = setTimeout(() => {
+          setCopied(false);
+          timerRef.current = null;
+        }, timeout);
+
+        return true;
+      } catch (err) {
+        clearCopyTimer();
+
+        const errorObj =
+          err instanceof Error ? err : new Error("Failed to copy text.");
+
+        setCopied(false);
+        setCopiedText(null);
+        setError(errorObj);
+
+        onError?.(errorObj);
+
+        return false;
+      }
+    },
+    [timeout, onSuccess, onError, clearCopyTimer]
+  );
+
+  useEffect(() => {
+    return () => {
+      clearCopyTimer();
+    };
+  }, [clearCopyTimer]);
+
+  return {
+    copy,
+    copied,
+    copiedText,
+    error,
+    reset,
+  };
 }
