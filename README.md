@@ -3,11 +3,18 @@
 > A lightweight React hook for copying text to the clipboard with TypeScript support.
 
 ![npm](https://img.shields.io/npm/v/react-use-copy)
-![downloads](https://img.shields.io/npm/dm/react-use-copy)
 ![license](https://img.shields.io/npm/l/react-use-copy)
 ![typescript](https://img.shields.io/badge/TypeScript-Ready-blue)
 
-## ✨ Features
+## 🚀 Live Demo
+
+Try it instantly in your browser.
+
+- **CodeSandbox:** https://codesandbox.io/p/sandbox/react-use-copy-xnxtvg
+
+---
+
+## Features
 
 - 🚀 Lightweight
 - 📋 Uses the native Clipboard API
@@ -21,7 +28,7 @@
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install react-use-copy
@@ -41,7 +48,7 @@ pnpm add react-use-copy
 
 ---
 
-## 🚀 Basic Usage
+## Basic Usage
 
 ```tsx
 import { useCopy } from "react-use-copy";
@@ -59,7 +66,7 @@ export default function App() {
 
 ---
 
-## 🎟 Coupon Code Example
+## Coupon Code Example
 
 ```tsx
 import { useCopy } from "react-use-copy";
@@ -87,7 +94,7 @@ export default function Coupon() {
 
 ---
 
-## ⚙️ API
+## API
 
 ### useCopy(options?)
 
