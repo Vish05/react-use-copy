@@ -1,39 +1,49 @@
 export interface UseCopyOptions {
   /**
-   * Time in milliseconds before copied resets.
+   * Time in milliseconds before the `copied` state resets.
    * @default 1500
    */
   timeout?: number;
 
   /**
-   * Called after successful copy.
+   * Called after a successful copy operation.
    */
   onSuccess?: () => void;
 
   /**
-   * Called when copy fails.
+   * Called when the copy operation fails.
    */
   onError?: (error: Error) => void;
 }
 
 export interface UseCopyReturn {
   /**
-   * Copy text to clipboard.
+   * Copies the provided text to the clipboard.
+   *
+   * @returns `true` if the copy succeeds, otherwise `false`.
    */
   copy: (text: string) => Promise<boolean>;
 
   /**
-   * Indicates whether the last copy succeeded.
+   * Indicates whether the last copy operation was successful.
    */
   copied: boolean;
 
   /**
-   * Last copy error.
+   * The last successfully copied text.
+   *
+   * Returns `null` if nothing has been copied yet
+   * or after calling `reset()`.
+   */
+  copiedText: string | null;
+
+  /**
+   * The last error encountered during a copy operation.
    */
   error: Error | null;
 
   /**
-   * Reset copied and error state.
+   * Resets the `copied`, `copiedText`, and `error` states.
    */
   reset: () => void;
 }
