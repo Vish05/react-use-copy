@@ -28,6 +28,11 @@ Try it instantly in your browser.
 
 ---
 
+## 📋 Requirements
+
+- React 16.8+
+- Modern browser with Clipboard API support
+
 ## Installation
 
 ```bash
@@ -92,32 +97,31 @@ export default function Coupon() {
 }
 ```
 
----
-
 ## API
 
 ### useCopy(options?)
 
 ```ts
-const { copy, copied, error, reset } = useCopy(options);
+const { copy, copied, copiedText, error, reset } = useCopy(options);
 ```
 
 ### Options
 
-| Property  | Type                   | Default | Description                      |
-| --------- | ---------------------- | ------- | -------------------------------- |
-| timeout   | number                 | 1500    | Reset copied state after timeout |
-| onSuccess | () => void             | -       | Called after successful copy     |
-| onError   | (error: Error) => void | -       | Called if copy fails             |
+| Property    | Type                     | Default | Description                                           |
+| ----------- | ------------------------ | :-----: | ----------------------------------------------------- |
+| `timeout`   | `number`                 | `1500`  | Time in milliseconds before the `copied` state resets |
+| `onSuccess` | `() => void`             |    —    | Called after a successful copy                        |
+| `onError`   | `(error: Error) => void` |    —    | Called if the copy operation fails                    |
 
 ### Returns
 
-| Property | Type                                 | Description                  |
-| -------- | ------------------------------------ | ---------------------------- |
-| copy     | `(text: string) => Promise<boolean>` | Copy text to clipboard       |
-| copied   | boolean                              | Indicates successful copy    |
-| error    | Error \| null                        | Last clipboard error         |
-| reset    | () => void                           | Reset copied and error state |
+| Property     | Type                                 | Description                                              |
+| ------------ | ------------------------------------ | -------------------------------------------------------- |
+| `copy`       | `(text: string) => Promise<boolean>` | Copies text to the clipboard                             |
+| `copied`     | `boolean`                            | Indicates whether the last copy operation was successful |
+| `copiedText` | `string \| null`                     | The last successfully copied text                        |
+| `error`      | `Error \| null`                      | The last copy error                                      |
+| `reset`      | `() => void`                         | Resets the `copied`, `copiedText`, and `error` states    |
 
 ---
 
