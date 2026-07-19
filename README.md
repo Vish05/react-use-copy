@@ -1,6 +1,6 @@
 # react-use-copy
 
-> A lightweight React hook for copying text to the clipboard with TypeScript support.
+> A lightweight, zero-dependency React hook for copying text to the clipboard with full TypeScript support.
 
 ![npm](https://img.shields.io/npm/v/react-use-copy)
 ![license](https://img.shields.io/npm/l/react-use-copy)

@@ -1,7 +1,7 @@
 {
   "name": "react-use-copy",
   "version": "1.1.0",
-  "description": "A lightweight React hook for copying text to the clipboard with TypeScript support.",
+  "description": "A lightweight, zero-dependency React hook for copying text to the clipboard with full TypeScript support, configurable timeout, copied state, and error handling.",
   "license": "MIT",
   "author": "Vishal Tanna",
   "type": "module",
@@ -45,7 +45,8 @@
     "clipboard-api",
     "use-copy",
     "useCopy",
-    "typescript"
+    "typescript",
+    "javascript"
   ],
   "repository": {
     "type": "git",
